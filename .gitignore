@@ -1,0 +1,73 @@
+
+###########
+##Eclipse
+###########
+.plugins/
+.lock
+.log
+.ini
+.metadata/
+.project
+.settings/
+.pydevproject
+org.*
+com.*
+.classpath
+*.ini
+*.log
+/Debug
+/Release
+.cproject
+
+#############
+## Windows
+#############
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac
+.DS_Store
+
+
+#############
+## Python
+#############
+
+*.pyx
+*.pyc
+
+# Packages
+*.egg
+*.egg-info
+dist/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+
+############
+## TI-GCC
+############
+*.tpr
+*.89z
+*.9xz
+*.v2z
+*.o
+*.s
+
+###########
+## gcc
+###########
+*.exe
+
+###########
+## Jython
+###########
+*.class
