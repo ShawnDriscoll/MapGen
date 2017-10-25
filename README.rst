@@ -1,4 +1,4 @@
-**MapGen 0.0.3b for Python 2.5**
+**MapGen 0.0.4b for Python 2.5**
 ===============================
 
 .. figure:: images/mapgen_cover_art.png

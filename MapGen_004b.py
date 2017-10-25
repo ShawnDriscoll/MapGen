@@ -70,11 +70,11 @@ sector = {'Solomani Rim': (0, -3), 'Old Expanses': (1, -2), 'Fornast': (1, 0),
 XORG_SECTOR, YORG_SECTOR = sector['Core']
 
 __author__ = 'Shawn Driscoll <shawndriscoll@hotmail.com>\nshawndriscoll.blogspot.com'
-__version__ = '0.0.3b'
+__version__ = '0.0.4b'
 
 #clock = pygame.time.Clock()
 
-def main(voice_muted, grid_style, zone_style, see_thru):
+def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
     
     xx = XORG_SECTOR
     yy = YORG_SECTOR
@@ -348,6 +348,9 @@ def main(voice_muted, grid_style, zone_style, see_thru):
                     else:
                         zone_style = 'fixed'
                     event_scanning = False
+                elif event.key == K_t:
+                    trade_code = not trade_code
+                    event_scanning = False
                 elif event.key == K_ESCAPE:
                     still_displaying = False
                     event_scanning = False
@@ -360,7 +363,7 @@ def main(voice_muted, grid_style, zone_style, see_thru):
                 if grid_style == 'HEX_grid_18' or grid_style == 'HEX_grid_20':
                     grid_style = 'HEX_grid_40'
                     
-            voiced_sector_name = display_map(xx, yy, zoom, grid_style, zone_style, see_thru, subxx, subyy)
+            voiced_sector_name = display_map(xx, yy, zoom, grid_style, zone_style, trade_code, see_thru, subxx, subyy)
             
             if zoom == 8:
                 if grid_style == 'HEX_grid_40':
@@ -404,6 +407,7 @@ if __name__ == '__main__':
     voice_muted = True
     grid_style = 'RECT_grid'
     zone_style = 'circled'
+    trade_code = False
     see_thru = False
     
     if not voice_muted:
@@ -413,7 +417,7 @@ if __name__ == '__main__':
         engine.say(text)
         engine.runAndWait()
         
-    log = logging.getLogger('MapGen_0.0.3b')
+    log = logging.getLogger('MapGen_' + __version__)
     log.setLevel(logging.DEBUG)
 
     if not os.path.exists('Logs'):
@@ -432,7 +436,7 @@ if __name__ == '__main__':
     trange = time.localtime()
     if trange[0] > 2017 or trange[1] > 12:
         print
-        print Fore.RED + __app__, 'EXPIRED.'
+        print Fore.RED + Style.BRIGHT + __app__, 'EXPIRED.'
         print Fore.RESET + Back.RESET + Style.RESET_ALL
         print
         print __author__
@@ -448,18 +452,21 @@ if __name__ == '__main__':
         print release
         print 'Pygame 1.9.1release-svn2575'
         print 'SDL 1.2.13'
-        print
+        print Fore.RED + Style.BRIGHT
         if vernum != '1.0':
-            print Fore.RED + Style.BRIGHT + 'WARNING! Different version of mapper installed:', vernum
+            print 'WARNING! Different version of mapper installed:', vernum
             log.warning('WARNING! Different version of mapper installed: ' + vernum)
         if pygame.version.vernum != (1, 9, 1):
-            print Fore.RED + Style.BRIGHT + 'WARNING! Different version of Pygame installed:', pygame.version.ver
+            print 'WARNING! Different version of Pygame installed:', pygame.version.ver
         if pygame.get_sdl_version() != (1, 2, 13):
-            print Fore.RED + Style.BRIGHT + 'WARNING! Different version of SDL installed:', pygame.get_sdl_version()
-        print Fore.RESET + Back.RESET + Style.RESET_ALL
+            print 'WARNING! Different version of SDL installed:', pygame.get_sdl_version()
+        if not pygame.image.get_extended():
+            print 'No extended image file format support for Pygame.' + Fore.RESET + Back.RESET + Style.RESET_ALL
+        else:
+            print Fore.RESET + Back.RESET + Style.RESET_ALL + 'Extended image file format supported for Pygame.'            
         print
         print '----------------------------'
         print __author__
         print
         
-        main(voice_muted, grid_style, zone_style, see_thru)
+        main(voice_muted, grid_style, zone_style, trade_code, see_thru)

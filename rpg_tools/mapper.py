@@ -6,6 +6,7 @@ from math import cos, sin
 #from pygame.locals import *
 import os
 import logging
+import sys
 from constants import __app__
 from constants import *
 
@@ -143,6 +144,140 @@ pygame.display.set_caption(window_title)
 window_icon = pygame.image.load('images/shonner_die_alpha.png')
 pygame.display.set_icon(window_icon)
 
+agricultural_world = pygame.image.load('images/agricultural_70.png').convert_alpha()
+garden_world = pygame.image.load('images/garden_70.png').convert_alpha()
+desert_world = pygame.image.load('images/desert_0.png').convert_alpha()
+ice_capped_world = pygame.image.load('images/ice_capped_100.png').convert_alpha()
+industrial_world = pygame.image.load('images/industrial_0.png').convert_alpha()
+non_agricultural_world = pygame.image.load('images/non_agricultural_30.png').convert_alpha()
+non_industrial_world = pygame.image.load('images/non_industrial_30.png').convert_alpha()
+water_world = pygame.image.load('images/water_100.png').convert_alpha()
+fluid_world = pygame.image.load('images/fluid_100.png').convert_alpha()
+vacuum_world = pygame.image.load('images/vacuum.png').convert_alpha()
+asteroid = pygame.image.load('images/asteroid_0_alternate.png').convert_alpha()
+generic_10 = pygame.image.load('images/generic_10.png').convert_alpha()
+generic_20 = pygame.image.load('images/generic_20.png').convert_alpha()
+generic_30 = pygame.image.load('images/generic_30.png').convert_alpha()
+generic_40 = pygame.image.load('images/generic_40.png').convert_alpha()
+generic_50 = pygame.image.load('images/generic_50.png').convert_alpha()
+generic_60 = pygame.image.load('images/generic_60.png').convert_alpha()
+generic_70 = pygame.image.load('images/generic_70.png').convert_alpha()
+generic_80 = pygame.image.load('images/generic_80.png').convert_alpha()
+generic_90 = pygame.image.load('images/generic_90.png').convert_alpha()
+generic_100 = pygame.image.load('images/water_100.png').convert_alpha()
+
+world_scale = 4
+
+# for jj in range(11):
+#     print 8 + jj*4,
+# print
+
+def _planet(surface, color, pos, radius, thickness, world_size, world_atmosphere, world_hydrographics, world_population):
+    world_image =''
+    if world_atmosphere >= 4 \
+                and world_atmosphere <= 9 \
+                and world_hydrographics >= 4 \
+                and world_hydrographics <= 8 \
+                and world_population >= 5 \
+                and world_population <= 7:
+        world_image = agricultural_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_size >= 6 \
+                and world_size <= 8 \
+                and (world_atmosphere == 5 \
+                or world_atmosphere == 6 \
+                or world_atmosphere == 8) \
+                and world_hydrographics >= 5 \
+                and world_hydrographics <= 7:
+        world_image = garden_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_atmosphere >= 2 \
+                and world_hydrographics == 0:
+        world_image = desert_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_atmosphere >= 0 \
+                and world_atmosphere <= 1 \
+                and world_hydrographics >= 1:
+        world_image = ice_capped_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if (world_atmosphere >= 0 \
+                and world_atmosphere <= 2 \
+                or world_atmosphere == 4 \
+                or world_atmosphere == 7 \
+                or world_atmosphere == 9) \
+                and world_population >= 9:
+        world_image = industrial_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_atmosphere >= 0 \
+                and world_atmosphere <= 3 \
+                and world_hydrographics >= 0 \
+                and world_hydrographics <= 3 \
+                and world_population >= 6:
+        world_image = non_agricultural_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_population <= 6:
+        world_image = non_industrial_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_hydrographics == 10 \
+                and world_atmosphere >= 1 \
+                and world_atmosphere <= 9:
+        world_image = water_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_atmosphere >= 10 \
+                and world_atmosphere <= 12 \
+                and world_hydrographics >= 1 \
+                and world_hydrographics <= 10:
+        world_image = fluid_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_atmosphere == 0:
+        world_image = vacuum_world
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_size == 0 \
+                and world_atmosphere == 0 \
+                and world_hydrographics == 0:
+        world_image = asteroid
+        world_image = pygame.transform.scale(world_image, (24, 24))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+    if world_image == '':
+        world_image = eval('generic_' + str(world_hydrographics * 10))
+        world_image = pygame.transform.scale(world_image, (8 + world_size*world_scale, 8 + world_size*world_scale))
+        x, y = pos
+        w, h = world_image.get_size()
+        surface.blit(world_image, (x-w/2, y-h/2))
+        #_circle(screen, color, pos, radius, thickness)
+
 def _pixel(surface, color, pos):
     pygame.draw.line(surface, color, pos, pos)
 
@@ -192,9 +327,9 @@ def _hexagon(surface, color, pos, radius, thickness, see_thru=False):
     else:
         pygame.draw.polygon(surface, color, points, thickness)
 
-def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled', see_thru=False, subxx=0, subyy=0):
+def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled', trade_code=False, see_thru=False, subxx=0, subyy=0):
     
-    log = logging.getLogger('MapGen_0.0.3b.mapper')
+    log = logging.getLogger('MapGen_0.0.4b.mapper')
 
     # was information for this program asked for?
     if xx == 'info':
@@ -602,18 +737,24 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                     temp_x = hex_x - 8*(subxx+x)
                                     temp_y = hex_y - 10*subyy
                                     
+                                    world_size = hex_code[line[world_tab+1]]
+                                    world_atmosphere = hex_code[line[world_tab+2]]
+                                    world_hydrographics = hex_code[line[world_tab+3]]
                                     #population = hex_code[line[world_tab+4]] * int(line[pop_m_tab])
-                                    population = hex_code[line[world_tab+4]]
+                                    world_population = hex_code[line[world_tab+4]]
                                     world_name = line[name_tab:name_tab+19].strip()
                                     world_name_color = white
                                     if 'Cx' in line[remarks_tab:remarks_tab+20] or 'Cp' in line[remarks_tab:remarks_tab+20]:
                                         world_name_color = red
-                                    if population >= 10:
+                                    if world_population >= 10:
                                         world_name = world_name.upper()
                                     world_name_font = pygame.font.SysFont('Eras ITC Demi', 18, False, False)
                                     world_name_text = world_name_font.render(world_name, True, world_name_color)
                                     world_uwp_font = pygame.font.SysFont('OCR A Extended', 10, False, False)
-                                    world_uwp_text = world_uwp_font.render(line[world_tab:world_tab+9], True, white)
+                                    if trade_code:
+                                        world_uwp_text = world_uwp_font.render(line[remarks_tab:remarks_tab+20], True, white)
+                                    else:
+                                        world_uwp_text = world_uwp_font.render(line[world_tab:world_tab+9], True, white)
                                     if hex_x / 2 == hex_x / 2.0:
                                         if grid_style == 'RECT_grid':
                                             if line[travel_code_tab] == 'R' or line[travel_code_tab] == 'A':
@@ -624,7 +765,7 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                 if zone_style == 'circled':
                                                     _circle(screen, zone_color, (int((temp_x-1)*64 + 33 + x*512),
                                                                                  int((temp_y-1)*70.4) + 70),
-                                                                                 int(zoom*2.5),
+                                                                                 int(zoom*3),
                                                                                  1,
                                                                                  see_thru)
                                                 else:
@@ -632,12 +773,17 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                                                     (temp_y-1)*70.4 + 40,
                                                                                     56,
                                                                                     63],
-                                                                                    DOT_SIZE-1,
+                                                                                    1,
                                                                                     see_thru)
                                             
-                                            _circle(screen, color, (int((temp_x-1)*64 + 33 + x*512),
+#                                             _circle(screen, color, (int((temp_x-1)*64 + 33 + x*512),
+#                                                                     int((temp_y-1)*70.4) + 70),
+#                                                                     int(zoom), 0)
+                                            
+                                            _planet(screen, color, (int((temp_x-1)*64 + 33 + x*512),
                                                                     int((temp_y-1)*70.4) + 70),
-                                                                    int(zoom), 0)
+                                                                    int(zoom), 0,
+                                                                    world_size, world_atmosphere, world_hydrographics, world_population)
                                             
                                             screen.blit(world_name_text, [int((temp_x-1)*64 + 32 - len(world_name)*7/2 + x*512),
                                                                           int((temp_y-1)*70.4) + 46])
@@ -656,7 +802,7 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                 if zone_style == 'circled':
                                                     _circle(screen, zone_color, (int((temp_x-1)*64 + 24 + x*512),
                                                                                  int((temp_y-1)*70.4) + 67),
-                                                                                 int(zoom*2.5),
+                                                                                 int(zoom*3),
                                                                                  1,
                                                                                  see_thru)
                                                 else:
@@ -666,9 +812,10 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                                                   1,
                                                                                   see_thru)
                                                              
-                                            _circle(screen, color, (int((temp_x-1)*64 + 24 + x*512),
+                                            _planet(screen, color, (int((temp_x-1)*64 + 24 + x*512),
                                                                     int((temp_y-1)*70.4) + 67),
-                                                                    int(zoom), 0)
+                                                                    int(zoom), 0,
+                                                                    world_size, world_atmosphere, world_hydrographics, world_population)
     
                                             screen.blit(world_name_text, [int((temp_x-1)*64 + 24 - len(world_name)*7/2 + x*512),
                                                                           int((temp_y-1)*70.4) + 46])
@@ -685,7 +832,7 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                 if zone_style == 'circled':
                                                     _circle(screen, zone_color, (int((temp_x-1)*64 + 33 + x*512),
                                                                                  int((temp_y-1)*70.4) + 37),
-                                                                                 int(zoom*2.5),
+                                                                                 int(zoom*3),
                                                                                  1,
                                                                                  see_thru)
                                                 else:
@@ -693,12 +840,13 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                                                     (temp_y-1)*70.4 + 4,
                                                                                     56,
                                                                                     63],
-                                                                                    DOT_SIZE-1,
+                                                                                    1,
                                                                                     see_thru)
                                             
-                                            _circle(screen, color, (int((temp_x-1)*64 + 33 + x*512),
+                                            _planet(screen, color, (int((temp_x-1)*64 + 33 + x*512),
                                                                     int((temp_y-1)*70.4) + 37),
-                                                                    int(zoom), 0)
+                                                                    int(zoom), 0,
+                                                                    world_size, world_atmosphere, world_hydrographics, world_population)
                                             
                                             screen.blit(world_name_text, [int((temp_x-1)*64 + 32 - len(world_name)*7/2 + x*512),
                                                                           int((temp_y-1)*70.4) + 12])
@@ -718,7 +866,7 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                 if zone_style == 'circled':
                                                     _circle(screen, zone_color, (int((temp_x-1)*64 + 24 + x*512),
                                                                                  int((temp_y-1)*70.4) + 33),
-                                                                                 int(zoom*2.5),
+                                                                                 int(zoom*3),
                                                                                  1,
                                                                                  see_thru)
                                                 else:
@@ -728,9 +876,10 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                                                                   1,
                                                                                   see_thru)
                                             
-                                            _circle(screen, color, (int((temp_x-1)*64 + 24 + x*512),
+                                            _planet(screen, color, (int((temp_x-1)*64 + 24 + x*512),
                                                                     int((temp_y-1)*70.4) + 33),
-                                                                    int(zoom), 0)
+                                                                    int(zoom), 0,
+                                                                    world_size, world_atmosphere, world_hydrographics, world_population)
                                         
                                             screen.blit(world_name_text, [int((temp_x-1)*64 + 24 - len(world_name)*7/2 + x*512),
                                                                           int((temp_y-1)*70.4) + 12])
@@ -764,3 +913,12 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
         return subsector_names
     else:
         return 'RESERVED'
+
+if __name__ == '__main__':
+    mapper_log.info('mapper was run without display_map() called.  Help will be sent if needed.')
+    print
+    if len(sys.argv) < 2:
+        print "     Type 'mapper -h' for help"
+    elif sys.argv[1] in ['-h', '/h', '--help', '-?', '/?']:
+        print '     mapper is a module (containing a display_map function)'
+        print '     that needs to be imported by MapGen.'
