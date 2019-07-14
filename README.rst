@@ -1,9 +1,13 @@
 **MapGen 0.0.4b for Classic Python 2.5**
 ========================================
 
+**MapGen** is a Classic Python 2.5 program for viewing Traveller RPG stellar maps.
+
 .. figure:: images/mapgen_cover_art.png
 
-**MapGen** is a Classic Python 2.5 program for viewing Traveller RPG stellar maps.
+The Traveller game in all forms is owned by Far Future Enterprises.
+Copyright 1977 - 2019 Far Future Enterprises.
+Traveller is a registered trademark of Far Future Enterprises.
 
 Requirements
 ------------

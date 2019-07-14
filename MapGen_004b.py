@@ -434,7 +434,7 @@ if __name__ == '__main__':
     log.info(__app__ + ' starting...')
     
     trange = time.localtime()
-    if trange[0] > 2017 or trange[1] > 12:
+    if trange[0] > 2019 or trange[1] > 12:
         print
         print Fore.RED + Style.BRIGHT + __app__, 'EXPIRED.'
         print Fore.RESET + Back.RESET + Style.RESET_ALL
