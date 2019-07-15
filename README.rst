@@ -1,4 +1,4 @@
-**MapGen 0.0.4b for Classic Python 2.5**
+**MapGen 0.0.5b for Classic Python 2.5**
 ========================================
 
 **MapGen** is a Classic Python 2.5 program for viewing Traveller RPG stellar maps.

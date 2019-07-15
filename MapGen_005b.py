@@ -70,7 +70,7 @@ sector = {'Solomani Rim': (0, -3), 'Old Expanses': (1, -2), 'Fornast': (1, 0),
 XORG_SECTOR, YORG_SECTOR = sector['Core']
 
 __author__ = 'Shawn Driscoll <shawndriscoll@hotmail.com>\nshawndriscoll.blogspot.com'
-__version__ = '0.0.4b'
+__version__ = '0.0.5b'
 
 #clock = pygame.time.Clock()
 
@@ -340,15 +340,18 @@ def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
                     grid_style = 'RECT_grid'
                     event_scanning = False
                 elif event.key == K_c:
+                    temp_muted = True
                     see_thru = not see_thru
                     event_scanning = False
                 elif event.key == K_z:
+                    temp_muted = True
                     if zone_style == 'fixed':
                         zone_style = 'circled'
                     else:
                         zone_style = 'fixed'
                     event_scanning = False
                 elif event.key == K_t:
+                    temp_muted = True
                     trade_code = not trade_code
                     event_scanning = False
                 elif event.key == K_ESCAPE:
@@ -435,6 +438,7 @@ if __name__ == '__main__':
     
     trange = time.localtime()
     if trange[0] > 2019 or trange[1] > 12:
+        log.info(__app__ + ' EXPIRED.')
         print
         print Fore.RED + Style.BRIGHT + __app__, 'EXPIRED.'
         print Fore.RESET + Back.RESET + Style.RESET_ALL
