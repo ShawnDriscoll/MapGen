@@ -9,6 +9,14 @@ The Traveller game in all forms is owned by Far Future Enterprises.
 Copyright 1977 - 2019 Far Future Enterprises.
 Traveller is a registered trademark of Far Future Enterprises.
 
+.. figure:: images/mapgen_screen1.png
+
+.. figure:: images/mapgen_screen2.png
+
+.. figure:: images/mapgen_screen3.png
+
+.. figure:: images/mapgen_screen4.png
+
 Requirements
 ------------
 
@@ -46,13 +54,13 @@ The mouse wheel will zoom the map in and out while pointing.
 
 Pressing **m** will toggle the computer's voice on/off.
 
-Pressing **h** will flip a hex map(s) at different zoom levels.
+Pressing **h** will flip to a hex map(s) at different zoom levels.
 
 Pressing **r** will flip to a rectangle map.
 
-Pressing **c** will toggle solid/clear zones while zoomed in.
+Pressing **c** will toggle solid/clear travel zones while zoomed in.
 
-Pressing **z** will toggle circle/hex/rectangle zones while zoomed in.
+Pressing **z** will toggle circle/hex/rectangle travel zones while zoomed in.
 
 Pressing **t** will toggle world UPP/TC while zoomed in.
 
