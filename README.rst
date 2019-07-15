@@ -35,6 +35,30 @@ Warning
 **MapGen** will not work with **Python 2.6+**.
 
 
+Usage
+-----
+
+Click on a sector to center it.
+
+Dragging a sector (or pressing the arrow keys) will scroll the map.
+
+The mouse wheel will zoom the map in and out while pointing.
+
+Pressing **m** will toggle the computer's voice on/off.
+
+Pressing **h** will flip a hex map(s) at different zoom levels.
+
+Pressing **r** will flip to a rectangle map.
+
+Pressing **c** will toggle solid/clear zones while zoomed in.
+
+Pressing **z** will toggle circle/hex/rectangle zones while zoomed in.
+
+Pressing **t** will toggle world UPP/TC while zoomed in.
+
+Pressing **ESC** will exit the program.
+
+
 Contact
 -------
 Questions? Please contact shawndriscoll@hotmail.com
