@@ -62,7 +62,7 @@ Pressing **c** will toggle solid/clear travel zones while zoomed in.
 
 Pressing **z** will toggle circle/hex/rectangle travel zones while zoomed in.
 
-Pressing **t** will toggle world UPP/TC while zoomed in.
+Pressing **t** will toggle world UWP/TC while zoomed in.
 
 Pressing **ESC** will exit the program.
 
