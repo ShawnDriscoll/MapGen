@@ -243,8 +243,11 @@ allegiance_color = {'4Wor': purple,
                     'SoFr': blue,
                     'SoHn': blue,
                     'SoKv': blue,
+                    'SoNS': blue,
                     'SoQu': blue,
+                    'SoRD': blue,
                     'SoRz': blue,
+                    'SoWu': blue,
                     'Sp': green,
                     'Sp  ': green,
                     'Sr': red,
@@ -509,9 +512,9 @@ def _hexagon(surface, color, pos, radius, thickness, see_thru=False):
     else:
         pygame.draw.polygon(surface, color, points, thickness)
 
-def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled', trade_code=False, see_thru=False, subxx=0, subyy=0):
+def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled', trade_code=False, see_thru=False, show_loc=True, show_grid=True, subxx=0, subyy=0):
     
-    log = logging.getLogger('MapGen_0.0.5b.mapper')
+    log = logging.getLogger('MapGen_0.0.6b.mapper')
 
     # was information for this program asked for?
     if xx == 'info':
@@ -584,44 +587,44 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                         pygame.draw.rect(screen, color, (x*32*X_SPACING*x_zoom, y*40*Y_SPACING*y_zoom, 32*X_SPACING*x_zoom, 40*Y_SPACING*y_zoom), DOT_SIZE*zoom)
                         
                         
+                        if show_grid:
+                            for i in range(32):
+                                for j in range(40):
                         
-                        for i in range(32):
-                            for j in range(40):
-                    
-                                color = gray
-                                
-                                if i / 2 == i / 2.0:
-                                    if zoom < 4:
-                                        _pixel(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom))
+                                    color = gray
+                                    
+                                    if i / 2 == i / 2.0:
+                                        if zoom < 4:
+                                            _pixel(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom))
+                                        else:
+                                            #_circle(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom), DOT_SIZE, 0)
+                                            if grid_style == 'RECT_grid':
+                                                _rectangle(screen, color, [i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 2,
+                                                                           j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + 2,
+                                                                           14,
+                                                                           15],
+                                                                           DOT_SIZE-1)
+                                            elif grid_style == 'HEX_grid_20' or grid_style == 'HEX_grid_18':
+                                                _hexagon(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 9,
+                                                                         j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + 9),
+                                                                         int(grid_style[9:11])/2,
+                                                                         1)
                                     else:
-                                        #_circle(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom), DOT_SIZE, 0)
-                                        if grid_style == 'RECT_grid':
-                                            _rectangle(screen, color, [i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 2,
-                                                                       j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + 2,
-                                                                       14,
-                                                                       15],
-                                                                       DOT_SIZE-1)
-                                        elif grid_style == 'HEX_grid_20' or grid_style == 'HEX_grid_18':
-                                            _hexagon(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 9,
-                                                                     j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + 9),
-                                                                     int(grid_style[9:11])/2,
-                                                                     1)
-                                else:
-                                    if zoom < 4:
-                                        _pixel(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom))
-                                    else:
-                                        #_circle(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom), DOT_SIZE, 0)
-                                        if grid_style == 'RECT_grid':
-                                            _rectangle(screen, color, [i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 2,
-                                                                       j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + OFFSET*y_zoom + 2,
-                                                                       14,
-                                                                       15],
-                                                                       DOT_SIZE-1)
-                                        elif grid_style == 'HEX_grid_20' or grid_style == 'HEX_grid_18':
-                                            _hexagon(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 9,
-                                                                     j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom + 9),
-                                                                     int(grid_style[9:11])/2,
-                                                                     1)
+                                        if zoom < 4:
+                                            _pixel(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom))
+                                        else:
+                                            #_circle(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom, j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom), DOT_SIZE, 0)
+                                            if grid_style == 'RECT_grid':
+                                                _rectangle(screen, color, [i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 2,
+                                                                           j*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom + OFFSET*y_zoom + 2,
+                                                                           14,
+                                                                           15],
+                                                                           DOT_SIZE-1)
+                                            elif grid_style == 'HEX_grid_20' or grid_style == 'HEX_grid_18':
+                                                _hexagon(screen, color, (i*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom + 9,
+                                                                         j*Y_SPACING*y_zoom + OFFSET*y_zoom + y*40*Y_SPACING*y_zoom + 9),
+                                                                         int(grid_style[9:11])/2,
+                                                                         1)
                         
                         for line in sec_file_in:
                             #print line[:len(line)-1]
@@ -663,8 +666,11 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                                     population = hex_code[line[world_tab+4]]
                                     world_name = line[name_tab:name_tab+19].strip()
                                     if hex_x / 2 == hex_x / 2.0:
-                                        
-                                        if world_name == 'Reference' or world_name == 'Capital' or world_name == 'Regina' or world_name == 'Vland' or world_name == 'Terra':
+                                        if world_name == 'Reference' or world_name == 'Capital' \
+                                        or world_name == 'Regina' or world_name == 'Vland' \
+                                        or world_name == 'Terra' or world_name =='Guaran' \
+                                        or world_name == 'Glea' or world_name == 'Kusyu' \
+                                        or world_name == 'Zhdant' or world_name == 'Lair':
                                             color = yellow
                                             if zoom == 4:
                                                 _circle(screen, color, (int(hex_x*X_SPACING*x_zoom + x*32*X_SPACING*x_zoom) + 10 , int(hex_y*Y_SPACING*y_zoom + y*40*Y_SPACING*y_zoom) + 10), 8, 0)
@@ -847,34 +853,38 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
                             
                             if i/2 == i/2.0:
                                 if grid_style == 'RECT_grid':
-                                    _rectangle(screen, color, [i*64 + 4 + x*512,
-                                                               j*70.4 + 4,
-                                                               56,
-                                                               63],
-                                                               DOT_SIZE-1)
-                                    screen.blit(text, [i*64 + 22 + x*512,
-                                                       j*70.4 + 7])
+                                    if show_grid:
+                                        _rectangle(screen, color, [i*64 + 4 + x*512,
+                                                                   j*70.4 + 4,
+                                                                   56,
+                                                                   63],
+                                                                   DOT_SIZE-1)
+                                    if show_loc:
+                                        screen.blit(text, [i*64 + 22 + x*512, j*70.4 + 7])
                                 elif grid_style == 'HEX_grid_40':
-                                    _hexagon(screen, color, (i*64 + 24 + x*512,
-                                                             j*70.4 + 32),
-                                                             int(grid_style[9:11]), 1)
-                                    screen.blit(text, [i*64 + 14 + x*512,
-                                                       j*70.4])
+                                    if show_grid:
+                                        _hexagon(screen, color, (i*64 + 24 + x*512,
+                                                                 j*70.4 + 32),
+                                                                 int(grid_style[9:11]), 1)
+                                    if show_loc:
+                                        screen.blit(text, [i*64 + 14 + x*512, j*70.4])
                             else:
                                 if grid_style == 'RECT_grid':
-                                    _rectangle(screen, color, [i*64 + 4 + x*512,
-                                                               j*70.4 + 4 + 36,
-                                                               56,
-                                                               63],
-                                                               DOT_SIZE-1)
-                                    screen.blit(text, [i*64 + 22 + x*512,
-                                                       j*70.4 + 7 + 36])
+                                    if show_grid:
+                                        _rectangle(screen, color, [i*64 + 4 + x*512,
+                                                                   j*70.4 + 4 + 36,
+                                                                   56,
+                                                                   63],
+                                                                   DOT_SIZE-1)
+                                    if show_loc:
+                                        screen.blit(text, [i*64 + 22 + x*512, j*70.4 + 7 + 36])
                                 elif grid_style == 'HEX_grid_40':
-                                    _hexagon(screen, color, (i*64 + 24 + x*512,
-                                                             j*70.4 + 32 + 36),
-                                                             int(grid_style[9:11]), 1)
-                                    screen.blit(text, [i*64 + 14 + x*512,
-                                                       j*70.4 + 36])
+                                    if show_grid:
+                                        _hexagon(screen, color, (i*64 + 24 + x*512,
+                                                                 j*70.4 + 32 + 36),
+                                                                 int(grid_style[9:11]), 1)
+                                    if show_loc:
+                                        screen.blit(text, [i*64 + 14 + x*512, j*70.4 + 36])
                     
                     subsector_list = []
                     
@@ -979,7 +989,6 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
 #                                         if world_name == 'Reference' or world_name == 'Capital' or world_name == 'Regina' or world_name == 'Vland' or world_name == 'Terra':
 #                                             color = yellow
 #                                             _circle(screen, color, (int(hex_x*X_SPACING*x_zoom + subxx*32*X_SPACING*x_zoom), int(hex_y*Y_SPACING*y_zoom + subyy*40*Y_SPACING*y_zoom)), 8, 0)
-
                                             if line[travel_code_tab] == 'R' or line[travel_code_tab] == 'A':
                                                 if line[travel_code_tab] == 'R':
                                                     zone_color = red
@@ -1042,8 +1051,6 @@ def display_map(xx=0, yy=0, zoom=1, grid_style='RECT_grid', zone_style='circled'
 #                                         if world_name == 'Reference' or world_name == 'Capital' or world_name == 'Regina' or world_name == 'Vland' or world_name == 'Terra':
 #                                             color = yellow
 #                                             _circle(screen, color, (int(hex_x*X_SPACING*x_zoom + subxx*32*X_SPACING*x_zoom), int(hex_y*Y_SPACING*y_zoom + OFFSET*y_zoom + subyy*40*Y_SPACING*y_zoom)), 8, 0)
-
-                                        
                                             if line[travel_code_tab] == 'R' or line[travel_code_tab] == 'A':
                                                 if line[travel_code_tab] == 'R':
                                                     zone_color = red

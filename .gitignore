@@ -1,7 +1,7 @@
 
-###########
+#############
 ## Eclipse
-###########
+#############
 .plugins/
 .lock
 .log
@@ -34,9 +34,9 @@ Desktop.ini
 .DS_Store
 
 
-#############
+############
 ## Python
-#############
+############
 
 *.pyx
 *.pyc
@@ -45,6 +45,7 @@ Desktop.ini
 *.egg
 *.egg-info
 dist/
+build/
 eggs/
 parts/
 var/
@@ -52,22 +53,12 @@ sdist/
 develop-eggs/
 .installed.cfg
 
-############
-## TI-GCC
-############
-*.tpr
-*.89z
-*.9xz
-*.v2z
-*.o
-*.s
-
-###########
+#########
 ## gcc
-###########
+#########
 *.exe
 
-###########
+############
 ## Jython
-###########
+############
 *.class

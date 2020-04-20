@@ -70,11 +70,11 @@ sector = {'Solomani Rim': (0, -3), 'Old Expanses': (1, -2), 'Fornast': (1, 0),
 XORG_SECTOR, YORG_SECTOR = sector['Core']
 
 __author__ = 'Shawn Driscoll <shawndriscoll@hotmail.com>\nshawndriscoll.blogspot.com'
-__version__ = '0.0.5b'
+__version__ = '0.0.6b'
 
 #clock = pygame.time.Clock()
 
-def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
+def main(voice_muted, grid_style, zone_style, trade_code, see_thru, show_loc, show_grid):
     
     xx = XORG_SECTOR
     yy = YORG_SECTOR
@@ -325,7 +325,7 @@ def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
                         voice_muted = False
                     engine.say(text)
                     engine.runAndWait()
-                elif event.key == K_h:
+                elif event.key == pygame.K_h:
                     temp_muted = True
                     if zoom == 8:
                         grid_style = 'HEX_grid_40'
@@ -335,26 +335,34 @@ def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
                         else:
                             grid_style = 'HEX_grid_20'
                     event_scanning = False
-                elif event.key == K_r:
+                elif event.key == pygame.K_r:
                     temp_muted = True
                     grid_style = 'RECT_grid'
                     event_scanning = False
-                elif event.key == K_c:
+                elif event.key == pygame.K_c:
                     temp_muted = True
                     see_thru = not see_thru
                     event_scanning = False
-                elif event.key == K_z:
+                elif event.key == pygame.K_z:
                     temp_muted = True
                     if zone_style == 'fixed':
                         zone_style = 'circled'
                     else:
                         zone_style = 'fixed'
                     event_scanning = False
-                elif event.key == K_t:
+                elif event.key == pygame.K_t:
                     temp_muted = True
                     trade_code = not trade_code
                     event_scanning = False
-                elif event.key == K_ESCAPE:
+                elif event.key == pygame.K_l:
+                    temp_muted = True
+                    show_loc = not show_loc
+                    event_scanning = False
+                elif event.key == pygame.K_g:
+                    temp_muted = True
+                    show_grid = not show_grid
+                    event_scanning = False
+                elif event.key == pygame.K_ESCAPE:
                     still_displaying = False
                     event_scanning = False
 
@@ -366,7 +374,7 @@ def main(voice_muted, grid_style, zone_style, trade_code, see_thru):
                 if grid_style == 'HEX_grid_18' or grid_style == 'HEX_grid_20':
                     grid_style = 'HEX_grid_40'
                     
-            voiced_sector_name = display_map(xx, yy, zoom, grid_style, zone_style, trade_code, see_thru, subxx, subyy)
+            voiced_sector_name = display_map(xx, yy, zoom, grid_style, zone_style, trade_code, see_thru, show_loc, show_grid, subxx, subyy)
             
             if zoom == 8:
                 if grid_style == 'HEX_grid_40':
@@ -412,6 +420,8 @@ if __name__ == '__main__':
     zone_style = 'circled'
     trade_code = False
     see_thru = False
+    show_loc = True
+    show_grid = True
     
     if not voice_muted:
         # some text to speak
@@ -437,7 +447,7 @@ if __name__ == '__main__':
     log.info(__app__ + ' starting...')
     
     trange = time.localtime()
-    if trange[0] > 2019 or trange[1] > 12:
+    if trange[0] > 2020 or trange[1] > 12:
         log.info(__app__ + ' EXPIRED.')
         print
         print Fore.RED + Style.BRIGHT + __app__, 'EXPIRED.'
@@ -473,4 +483,4 @@ if __name__ == '__main__':
         print __author__
         print
         
-        main(voice_muted, grid_style, zone_style, trade_code, see_thru)
+        main(voice_muted, grid_style, zone_style, trade_code, see_thru, show_loc, show_grid)

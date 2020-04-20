@@ -1,4 +1,4 @@
-**MapGen 0.0.5b for Classic Python 2.5**
+**MapGen 0.0.6b for Classic Python 2.5**
 ========================================
 
 **MapGen** is a Classic Python 2.5 program for viewing Traveller RPG stellar maps.
@@ -6,7 +6,7 @@
 .. figure:: images/mapgen_cover_art.png
 
 The Traveller game in all forms is owned by Far Future Enterprises.
-Copyright 1977 - 2019 Far Future Enterprises.
+Copyright 1977 - 2020 Far Future Enterprises.
 Traveller is a registered trademark of Far Future Enterprises.
 
 .. figure:: images/mapgen_screen1.png
@@ -63,6 +63,10 @@ Pressing **c** will toggle solid/clear travel zones while zoomed in.
 Pressing **z** will toggle circle/hex/rectangle travel zones while zoomed in.
 
 Pressing **t** will toggle world UWP/TC while zoomed in.
+
+Pressing **l** will toggle the world system locations on/off.
+
+Pressing **g** will toggle the hex/rectangle grid on/off.
 
 Pressing **ESC** will exit the program.
 

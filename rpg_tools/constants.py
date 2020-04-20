@@ -18,4 +18,4 @@ TRANSPARENT = (255,0,255)
 
 #print 'SCREEN_SIZE =', SCREEN_SIZE
 
-__app__ = 'MapGen 0.0.5 (Beta)'
+__app__ = 'MapGen 0.0.6 (Beta)'
