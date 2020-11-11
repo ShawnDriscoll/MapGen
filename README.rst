@@ -11,6 +11,8 @@ The Traveller game in all forms is owned by Far Future Enterprises.
 Copyright 1977 - 2020 Far Future Enterprises.
 Traveller is a registered trademark of Far Future Enterprises.
 
+.. image:: images/video.png
+    :target: https://www.youtube.com/watch?v=9HZSrX36lh8
 
 .. figure:: images/mapgen_screen1.png
 
