@@ -23,21 +23,30 @@ engine = pyttsx.init()
 
 reg_voice_path = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\'
 
-voice = {'US Zira': {'Name': 'TTS_MS_EN-US_ZIRA_11.0',
-                     'Rate': -70,
-                     'Volume': -0.3},
-         'UK Woman': {'Name': 'eSpeak_1',
-                     'Rate': -130,
-                     'Volume': -0.7},
-         'UK Man': {'Name': 'eSpeak_2',
-                     'Rate': -120,
-                     'Volume': -0.7},
-         'US David': {'Name': 'TTS_MS_EN-US_DAVID_11.0',
-                     'Rate': -60,
-                     'Volume': -0.5}
-         }
+voice = {'US Zira':     {'Name': 'TTS_MS_EN-US_ZIRA_11.0',
+                         'Rate': -50,
+                         'Volume': -0.3},
+         'UK Woman':    {'Name': 'eSpeak_1',
+                         'Rate': -130,
+                         'Volume': -0.7},
+         'UK Man':      {'Name': 'eSpeak_2',
+                         'Rate': -120,
+                         'Volume': -0.7},
+         'US David':    {'Name': 'TTS_MS_EN-US_DAVID_11.0',
+                         'Rate': -60,
+                         'Volume': -0.5},
+         'GB Hazel':    {'Name': 'TTS_MS_EN-GB_HAZEL_11.0',
+                         'Rate': -50,
+                         'Volume': -0.3},
+         'DE Hedda':    {'Name': 'TTS_MS_DE-DE_HEDDA_11.0',
+                         'Rate': -50,
+                         'Volume': -0.3},
+         'CN Huihui':   {'Name': 'TTS_MS_ZH-CN_HUIHUI_11.0',
+                         'Rate': -50,
+                         'Volume': 0.0}
+        }
 
-speaker = 'US Zira'
+speaker = 'CN Huihui'  # Use 'US Zira' if program crashes, or if voice doesn't sound right.
 
 rate = engine.getProperty('rate')
 engine.setProperty('rate', rate + voice[speaker]['Rate'])
@@ -447,7 +456,7 @@ if __name__ == '__main__':
     log.info(__app__ + ' starting...')
     
     trange = time.localtime()
-    if trange[0] > 2020 or trange[1] > 12:
+    if trange[0] > 2031 or trange[1] > 12:
         log.info(__app__ + ' EXPIRED.')
         print
         print Fore.RED + Style.BRIGHT + __app__, 'EXPIRED.'
