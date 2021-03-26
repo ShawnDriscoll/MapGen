@@ -4,6 +4,17 @@
 #
 #####################################################################
 
+"""
+MapGen 0.0.6 Beta
+-----------------
+
+This program displays Traveller sectors and subsectors.
+
+The Traveller game in all forms is owned by Far Future Enterprises.
+Copyright 1977 - 2021 Far Future Enterprises.
+Traveller is a registered trademark of Far Future Enterprises.
+"""
+
 from colorama import init
 from colorama import Fore, Back, Style
 
@@ -43,10 +54,13 @@ voice = {'US Zira':     {'Name': 'TTS_MS_EN-US_ZIRA_11.0',
                          'Volume': -0.3},
          'CN Huihui':   {'Name': 'TTS_MS_ZH-CN_HUIHUI_11.0',
                          'Rate': -50,
-                         'Volume': 0.0}
+                         'Volume': 0.0},
+         'ZH-HK Tracy': {'Name': 'TTS_MS_ZH-HK_TRACY_11.0',
+                         'Rate': -50,
+                         'Volume': -0.0}
         }
 
-speaker = 'CN Huihui'  # Use 'US Zira' if program crashes, or if voice doesn't sound right.
+speaker = 'CN Huihui'  # Your system's default voice will be used if speaker value is not found in registry.
 
 rate = engine.getProperty('rate')
 engine.setProperty('rate', rate + voice[speaker]['Rate'])
@@ -424,7 +438,7 @@ def main(voice_muted, grid_style, zone_style, trade_code, see_thru, show_loc, sh
     
 if __name__ == '__main__':
     
-    voice_muted = True
+    voice_muted = False
     grid_style = 'RECT_grid'
     zone_style = 'circled'
     trade_code = False
