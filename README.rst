@@ -1,3 +1,7 @@
+.. image:: https://img.shields.io/github/stars/ShawnDriscoll/MapGen.svg
+	:target: https://github.com/ShawnDriscoll/MapGen/stargazers
+
+
 **MapGen 0.0.6b for Classic Python 2.5**
 ========================================
 
